@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      /* Navbar styles */
+      .navbar {
+        background-color: #333;
+        color: #fff;
+        padding: 15px;
+      }
+
+      /* Sidebar styles */
+      .sidebar {
+        background-color: #f2f2f2;
+        width: 250px;
+        padding: 15px;
+        float: left;
+      }
+      .sidebar ul{
+        list-style-type: none;
+
+      }
+
+      /* Form styles */
+      .form-container {
+        margin-left: 270px; /* Adjust this margin to accommodate the sidebar width */
+        padding: 15px;
+      }
+
+      .form-container input[type="text"],
+      select {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+        margin-bottom: 10px;
+      }
+
+      .form-container button {
+        background-color: #4caf50;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        width: 100%;
+      }
+
+      /* Table styles */
+      .result-table {
+        margin-top: 20px;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      .result-table th,
+      .result-table td {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      .result-table th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      .result-table tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .result-table tr:hover {
+        background-color: #ddd;
+      }
+
+      /* Responsive styles */
+      @media screen and (max-width: 768px) {
+        .sidebar {
+          width: 100%;
+          margin-bottom: 20px;
+          float: none;
+        }
+
+        .form-container {
+          margin-left: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="navbar">
+      <h2><center>STUDENT RESULT STATUS</center></h2>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <h3>Fields</h3>
+      <ul>
+        <li>NAME</li>
+        <li>REGNO</li>
+        <li>STAGE</li>
+        <li>BOARD</li>
+        <li>GRADE</li>
+      </ul>
+    </div>
+
+    <!-- Form -->
+    <div class="form-container">
+      <h3>Details Form</h3>
+      <form id="result-form">
+        <input type="text" placeholder="Enter student name" required />
+        <input type="text" id="regno" placeholder="Enter Register Number" required />
+        <select required>
+          <option value="">Select Stage</option>
+          <option value="SSLC">SSLC</option>
+          <option value="PUC">PUC</option>
+          <option value="DEGREE">DEGREE</option>
+        </select>
+        <select required>
+          <option value="">Select Board</option>
+          <option value="CBSE">CBSE</option>
+          <option value="STATE">STATE</option>
+          <option value="UNIVERSITY">UNIVERSITY</option>
+        </select>
+        <select required>
+          <option value="">Select Grade</option>
+          <option value="S">S</option>
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="F">F</option>
+        </select>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+
+    <!-- Result Table -->
+    <table class="result-table">
+      <thead>
+        <tr>
+          <th>NAME</th>
+          <th>REGNO</th>
+          <th>STAGE</th>
+          <th>BOARD</th>
+          <th>GRADE</th>
+        </tr>
+      </thead>
+      <tbody id="result-data">
+        <!-- Data will be dynamically added here using JavaScript -->
+      </tbody>
+    </table>
+
+    <script>
+      // JavaScript code to handle form submission and update table dynamically
+
+      // Get the form element
+      const form = document.getElementById("result-form");
+
+      // Listen for form submission
+      form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        // Get user input values
+        const name = document.querySelector("input[type=text]").value;
+        const REGNO = document.getElementById("regno").value;
+        const field1 = document.querySelector("select:nth-of-type(1)").value;
+        const field2 = document.querySelector("select:nth-of-type(2)").value;
+        const field3 = document.querySelector("select:nth-of-type(3)").value;
+
+        // Create a new row in the table
+        const table = document.getElementById("result-data");
+        const newRow = table.insertRow();
+
+        // Insert cells and set values
+        const nameCell = newRow.insertCell();
+        nameCell.textContent = name;
+        const REGNOCell = newRow.insertCell();
+        REGNOCell.textContent = REGNO;
+
+        const field1Cell = newRow.insertCell();
+        field1Cell.textContent = field1;
+
+        const field2Cell = newRow.insertCell();
+        field2Cell.textContent = field2;
+
+        const field3Cell = newRow.insertCell();
+        field3Cell.textContent = field3;
+
+        // Reset the form
+        form.reset();
+      });
+    </script>
+  </body>
+</html>
